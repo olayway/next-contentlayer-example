@@ -1,10 +1,10 @@
 import Head from "next/head";
 import { format, parseISO } from "date-fns";
-import { allPosts, Post } from "contentlayer/generated";
+import { allPosts } from "contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
 
 export async function getStaticPaths() {
-  const paths: string[] = allPosts.map((post) => post.url);
+  const paths = allPosts.map((post) => post.url);
   return {
     paths,
     fallback: false,
@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const post: Post = allPosts.find(
+  const post = allPosts.find(
     (post) => post._raw.flattenedPath === params.slug
   );
   return {
@@ -22,7 +22,7 @@ export async function getStaticProps({ params }) {
   };
 }
 
-const PostLayout = ({ post }: { post: Post }) => {
+const PostLayout = ({ post }) => {
   const MdxComponent = useMDXComponent(post.body.code);
   return (
     <>

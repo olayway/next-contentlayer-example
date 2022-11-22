@@ -1,15 +1,15 @@
 import Link from 'next/link'
 import { compareDesc, format, parseISO } from 'date-fns'
-import { allPosts, Post } from 'contentlayer/generated'
+import { allPosts } from 'contentlayer/generated'
 
 export async function getStaticProps() {
-  const posts: Post[] = allPosts.sort((a, b) => {
+  const posts = allPosts.sort((a, b) => {
     return compareDesc(new Date(a.date), new Date(b.date))
   })
   return { props: { posts } }
 }
 
-function PostCard(post: Post) {
+function PostCard(post) {
   return (
     <div className="mb-8">
       <h2 className="text-xl">
@@ -28,7 +28,7 @@ function PostCard(post: Post) {
   );
 }
 
-export default function Home({ posts }: { posts: Post[] }) {
+export default function Home({ posts }) {
   return (
     <div className="max-w-xl mx-auto py-8">
       <h1 className="text-3xl font-bold mb-8 text-center">Next.js Example</h1>

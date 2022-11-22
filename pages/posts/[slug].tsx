@@ -23,6 +23,7 @@ export async function getStaticProps({ params }) {
 }
 
 const PostLayout = ({ post }: { post: Post }) => {
+  const MdxComponent = useMDXComponent(post.body.code);
   return (
     <>
       <Head>
@@ -35,12 +36,11 @@ const PostLayout = ({ post }: { post: Post }) => {
           </time>
           <h1>{post.title}</h1>
         </div>
-        <div dangerouslySetInnerHTML={{ __html: post.body.html }} />
+        <MdxComponent />
+        {/* <div dangerouslySetInnerHTML={{ __html: post.body.html }} /> */}
       </article>
     </>
   );
-                <MdxComponent />
-                {/* <div dangerouslySetInnerHTML={{ __html: post.body.html }} /> */}
 };
 
 export default PostLayout;

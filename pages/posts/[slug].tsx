@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { format, parseISO } from "date-fns";
 import { allPosts, Post } from "contentlayer/generated";
+import { useMDXComponent } from "next-contentlayer/hooks";
 
 export async function getStaticPaths() {
   const paths: string[] = allPosts.map((post) => post.url);
@@ -38,6 +39,8 @@ const PostLayout = ({ post }: { post: Post }) => {
       </article>
     </>
   );
+                <MdxComponent />
+                {/* <div dangerouslySetInnerHTML={{ __html: post.body.html }} /> */}
 };
 
 export default PostLayout;
